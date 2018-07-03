@@ -375,11 +375,11 @@ componentDidMount(){
       }
     }
 
-  this.input.focus() 
+  this.input.focus()
 
   let container = this.props.story.state.outputStream[0].parent.name;
   this.props.updateRoom(`${_.startCase(container.replace(/_/g,' '))}`)
-
+  
 }
 
 componentDidUpdate() {
