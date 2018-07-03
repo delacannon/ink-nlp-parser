@@ -7,7 +7,7 @@ import Cursor from './Cursor'
 import { Grid, Row, Col } from 'react-flexbox-grid';
 import nlp from 'compromise'
 import * as Scroll from 'react-scroll';
-import { animateScroll as scroll, scrollSpy, scroller } from 'react-scroll'
+import { Link, Element , Events, animateScroll as scroll, scrollSpy, scroller } from 'react-scroll'
 import './Buttons.css'
 import _ from 'lodash'
 
@@ -21,6 +21,11 @@ componentDidMount(){
   
   this.props.updateText(this.props.story.Continue())  
 
+}
+
+componentWillUnmount() {
+    Events.scrollEvent.remove('begin');
+    Events.scrollEvent.remove('end');
 }
 
 scrollToBottom = () =>  {

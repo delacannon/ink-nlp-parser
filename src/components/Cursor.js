@@ -376,7 +376,7 @@ analizeText(event){
 componentWillUnmount() {
     Events.scrollEvent.remove('begin');
     Events.scrollEvent.remove('end');
-  }
+}
 
 componentDidMount(){
 
