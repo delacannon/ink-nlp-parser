@@ -368,7 +368,7 @@ componentDidMount(){
       suggestionHighlighted:{
         backgroundColor:'#f0f0f0'
       }
-    }
+  }
 
   this.input.focus();
 
