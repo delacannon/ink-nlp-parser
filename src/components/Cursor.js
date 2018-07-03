@@ -127,25 +127,23 @@ analizeText(event){
 
   if (event.key === 'Enter' && event.target.value.length>0) {
     
-    this.props.updateText("> "+event.target.value)
+    this.props.updateText(`> ${event.target.value}`);
 
-    let container = this.props.story.state.outputStream[0].parent.name;
-    let parentList = this.props.story.state.outputStream[0].parent.namedContent;
-    let getObjs = this.props.story.mainContentContainer.namedContent
-    let phrase = event.target.value.replace(/ /g,'_')
-    let other = {
-      'open':'Verb'
-    }
-    let text = nlp(event.target.value,other).sentences()
-    let terms = [...text.list[0].terms]
+    let container = this.props.story.state.outputStream[0].parent.name,
+        parentList = this.props.story.state.outputStream[0].parent.namedContent,
+        getObjs = this.props.story.mainContentContainer.namedContent,
+        phrase = event.target.value.replace(/ /g,'_'),
+        other = {
+        'open':'Verb'
+        };
+    let text = nlp(event.target.value,other).sentences(),
+        terms = [...text.list[0].terms];
 
-    let room_objects = this.getWordsFromRooom(parentList,true)
-    let room_verbs = this.getWordsFromRooom(parentList,false) 
+    let room_objects = this.getWordsFromRooom(parentList,true),
+        room_verbs = this.getWordsFromRooom(parentList,false);
 
       //Global objects 
-      let obj = []
-      let get_key = _.keys(getObjs)
-      let daobject = null
+      let obj = [], get_key = _.keys(getObjs), daobject = null
 
       get_key.forEach((k) => {
          obj.push(k.replace(/_/g,',').split(","))
@@ -171,8 +169,8 @@ analizeText(event){
 
       let direction = this.processDirection(phrase)
   
-      let keys = _.keys(parentList)
-      let actions = []
+      let keys = _.keys(parentList), actions = [];
+
       keys.forEach( k => {
         actions.push(k.replace(/_/g,',').split(","))
       })
@@ -233,7 +231,6 @@ analizeText(event){
     else if(terms[0].tags.Adjective){
         
         let str = ''
-
         
         verbs_default.forEach( (v) => {
           
@@ -245,21 +242,21 @@ analizeText(event){
         
         })
 
-        this.props.updateText(str)
+        this.props.updateText(str);
 
     }
     else if(!terms[0].tags.Verb && !daobject && direction === null){
 
-      this.props.updateText("That's not a verb I recognise.")
+      this.props.updateText("That's not a verb I recognise.");
     
     }
     else if(terms[0].tags.Verb && terms.length==1 && !daobject && direction === null){
 
-      let doc = nlp(terms[0].normal)
-      let verb_list = doc.verbs().conjugate()[0]
-      let infinitive = verb_list["Infinitive"];
+      let doc = nlp(terms[0].normal),
+          verb_list = doc.verbs().conjugate()[0],
+          infinitive = verb_list["Infinitive"],
+          str = '';
 
-      let str = ''
       verbs_default.forEach( (v) => {
         
           if(_.isEqual(v.name,terms[0].normal)){
@@ -291,8 +288,7 @@ analizeText(event){
             }
           })
 
-             let str = ''
-        let guess_word = '';
+      let str = '', guess_word = '';
         
       if(_words.nouns.length>0){
 
@@ -315,7 +311,7 @@ analizeText(event){
         str=`What do you mean?`
       }
 
-       this.props.updateText(str)
+       this.props.updateText(str);
 
       
     }
@@ -375,11 +371,11 @@ componentDidMount(){
       }
     }
 
-  this.input.focus()
+  this.input.focus();
 
   let container = this.props.story.state.outputStream[0].parent.name;
-  this.props.updateRoom(`${_.startCase(container.replace(/_/g,' '))}`)
-  
+  this.props.updateRoom(`${_.startCase(container.replace(/_/g,' '))}`);
+
 }
 
 componentDidUpdate() {

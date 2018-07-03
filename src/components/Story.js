@@ -105,24 +105,21 @@ uniqeObjects = (arrArg) => {
 clickInventoryItems(e){
 
 
-    let container = this.props.story.state.outputStream[0].parent.name;
-    let parentList = this.props.story.state.outputStream[0].parent.namedContent;
-    let getObjs = this.props.story.mainContentContainer.namedContent
-    let phrase = `examine_${e.target.innerHTML.replace(" ","_")}`
+    let container = this.props.story.state.outputStream[0].parent.name,
+        parentList = this.props.story.state.outputStream[0].parent.namedContent,
+        getObjs = this.props.story.mainContentContainer.namedContent,
+        phrase = `examine_${e.target.innerHTML.replace(" ","_")}`;
 
     
-    let text = nlp(`examine ${e.target.innerHTML}`).sentences()
-    let terms = [...text.list[0].terms]
+    let text = nlp(`examine ${e.target.innerHTML}`).sentences(),
+        terms = [...text.list[0].terms]
 
 
     let room_objects = this.getObjectFromRoom(parentList);
 
       //Global objects 
-      let obj = []
-      let get_key = _.keys(getObjs)
-      let daobject = null
+      let obj = [], get_key = _.keys(getObjs), daobject = null
   
-
       get_key.forEach((k) => {
          obj.push(k.replace(/_/g,',').split(","))
       })
@@ -153,8 +150,8 @@ clickInventoryItems(e){
 
 getInventoryItems(){
 
- let listData = this.props.story.variablesState.$("currentInventory")._keys;
- let items = _.values(listData)
+ let listData = this.props.story.variablesState.$("currentInventory")._keys,
+      items = _.values(listData)
  
  return items.map( item =>  {
       return (
