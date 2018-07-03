@@ -117,7 +117,7 @@ processDirection(str){
 }
 
 scrollToBottom = () =>  {
-    scroll.scrollToBottom();
+    scroll.scrollToBottom({isDynamic:true});
 }
 
 
@@ -321,6 +321,7 @@ analizeText(event){
 
     }
   }
+    this.scrollToBottom();
 }
 
  onChange = (event, { newValue }) => {
@@ -376,7 +377,7 @@ componentDidMount(){
 }
 
 componentDidUpdate() {
-
+  console.log("mm")
   this.scrollToBottom();
 }
 

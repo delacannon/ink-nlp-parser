@@ -16,9 +16,17 @@ constructor(props){
 }
 
 componentDidMount(){
+  
+  var text = ''
 
   while(this.props.story.canContinue){
-    this.props.updateText(this.props.story.Continue())
+    
+    text+=this.props.story.Continue()
+    if(!this.props.story.canContinue){
+      console.log("Done")
+      this.props.updateText(text)
+    }
+
   }
 
   if(this.props.ptext.charAt(0) == ">"){

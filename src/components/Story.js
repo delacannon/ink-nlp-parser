@@ -25,13 +25,8 @@ componentDidMount(){
 
 }
 
-componentWillUnmount() {
-    Events.scrollEvent.remove('begin');
-    Events.scrollEvent.remove('end');
-}
-
-scrollToBottom = () =>  {
-    scroll.scrollToBottom();
+scrollToBottom(){
+    scroll.scrollToBottom({isDynamic:true});
 }
 
 renderChoices(){
@@ -146,6 +141,7 @@ clickInventoryItems(e){
   this.props.updateText(`> examine ${e.target.innerHTML}`)
   this.props.story.ChoosePathString(`${daobject}`)
   this.props.updateText(this.props.story.Continue())
+  this.scrollToBottom()
 
 }
 
@@ -165,11 +161,13 @@ getInventoryItems(){
 
 }
 
+
+
 getStoryMap(){ }
 
 render() {
 
-  this.scrollToBottom()
+ 
   
     return (
 
