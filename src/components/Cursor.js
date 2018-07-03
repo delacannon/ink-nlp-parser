@@ -9,7 +9,6 @@ import _ from 'lodash'
 import * as Scroll from 'react-scroll';
 import { Link, Element , Events, animateScroll as scroll, scrollSpy, scroller } from 'react-scroll'
 
-
 const verbs_default = [
   {name: 'ask', default:'',pass:false},
   {name: 'move', default:'',pass:false},
@@ -88,8 +87,7 @@ uniqeObjects = (arrArg) => {
   });
 }
 
-getObjectFromRoom(list){
-
+getWordsFromRooom(list,noun){
   let arr = []
   let obj = []
 
@@ -98,34 +96,18 @@ getObjectFromRoom(list){
   })
 
   arr.forEach((m) =>{
-      var o = nlp(m).nouns().out('normal').trim().replace(/ /g,',')
-        if(o != ""){
-            obj.push(o.split(","));
-        }
+      var o = null
+      if(noun === false){
+          o = nlp(m).verbs().out('normal').trim().replace(/ /g,',')
+      }else{
+          o = nlp(m).nouns().out('normal').trim().replace(/ /g,',')
+      }
+      if(o != ""){
+          obj.push(o.split(","));
+      }
   })
 
   return this.uniqeObjects(_.flatten(obj))
-
-}
-
-getVerbsFromRoom(list){
-
-  let arr = []
-  let obj = []
-
-  _.mapValues(list,(e) => {
-      arr.push(e.name.split("_"))
-  })
-
-  arr.forEach((m) =>{
-      var o = nlp(m).verbs().out('normal').trim().replace(/ /g,',')
-        if(o != ""){
-            obj.push(o.split(","));
-        }
-  })
-
-  return this.uniqeObjects(_.flatten(obj))
-
 }
 
 processDirection(str){
@@ -157,8 +139,8 @@ analizeText(event){
     let text = nlp(event.target.value,other).sentences()
     let terms = [...text.list[0].terms]
 
-    let room_objects = this.getObjectFromRoom(parentList);
-    let room_verbs = this.getVerbsFromRoom(parentList)
+    let room_objects = this.getWordsFromRooom(parentList,true)
+    let room_verbs = this.getWordsFromRooom(parentList,false) 
 
       //Global objects 
       let obj = []
@@ -197,11 +179,11 @@ analizeText(event){
       
       var destiny = null
 
-       actions.forEach( (a,i) =>{
+      actions.forEach( (a,i) =>{
             if(_.intersection(a,phrase.split("_")).length>1){
               destiny = a.join("_")
             }
-       })
+      })
 
     if(direction !== null){
 
