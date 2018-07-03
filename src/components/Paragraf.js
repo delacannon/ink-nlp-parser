@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from "react-redux"
+import { updateText } from "../actions"
 
-import { updateText } from "../actions";
 import './Paragraf.css'
 
 

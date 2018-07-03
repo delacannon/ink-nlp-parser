@@ -5,7 +5,6 @@ import JaroWinkler from 'jaro-winkler'
 import nlp from 'compromise'
 import Autosuggest from 'react-autosuggest'
 import _ from 'lodash'
-
 import * as Scroll from 'react-scroll';
 import { Link, Element , Events, animateScroll as scroll, scrollSpy, scroller } from 'react-scroll'
 

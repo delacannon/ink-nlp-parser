@@ -1,15 +1,17 @@
 import React, { Component } from 'react'
 import { connect } from "react-redux"
-import { updateText, updateChoices } from "../actions";
+import { updateText, updateChoices } from "../actions"
+import { Grid, Row, Col } from 'react-flexbox-grid'
+import nlp from 'compromise'
+import * as Scroll from 'react-scroll'
+import { Link, Element , Events, animateScroll as scroll, scrollSpy, scroller } from 'react-scroll'
+import _ from 'lodash'
+
 import Paragraf from './Paragraf'
 import Choice from './Choices'
 import Cursor from './Cursor'
-import { Grid, Row, Col } from 'react-flexbox-grid';
-import nlp from 'compromise'
-import * as Scroll from 'react-scroll';
-import { Link, Element , Events, animateScroll as scroll, scrollSpy, scroller } from 'react-scroll'
+
 import './Buttons.css'
-import _ from 'lodash'
 
 class Story extends Component {
  	

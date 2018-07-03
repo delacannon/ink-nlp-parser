@@ -1,8 +1,8 @@
-import React, { Component } from 'react';
-import { connect } from "react-redux";
-import { updateText, updateChoices } from "../actions";
+import React, { Component } from 'react'
+import { connect } from "react-redux"
+import { updateText, updateChoices } from "../actions"
 
-import './Choice.css';
+import './Choice.css'
 
 class Choice extends Component {
  	
