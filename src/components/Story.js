@@ -56,7 +56,7 @@ getTags(){
   if(currentTags[0] === "parser"){
     return (
        <div key={Math.floor(Math.random()*9999)} style={{marginTop:'0.5em', display:'block'}}>
-        <Cursor />
+          <Cursor />
        </div>
       )
    }
@@ -79,8 +79,7 @@ return text
 
 getObjectFromRoom(list){
 
-  let arr = []
-  let obj = []
+  let arr = [], obj = []
 
   _.mapValues(list,(e) => {
       arr.push(e.name.split("_"))

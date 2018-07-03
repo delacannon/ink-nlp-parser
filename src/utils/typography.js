@@ -1,6 +1,6 @@
 import Typography from 'typography'
-import MoragaTheme from 'typography-theme-de-young'
+import ThemeDeYoung from 'typography-theme-de-young'
 
-const typography = new Typography(MoragaTheme)
+const typography = new Typography(ThemeDeYoung)
 
 export default typography

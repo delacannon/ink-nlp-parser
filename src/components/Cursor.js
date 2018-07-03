@@ -162,7 +162,6 @@ analizeText(event){
             if(terms[0].tags.Verb && terms.length>1){
               daobject = a.join("_")
             }
-          
           }
       })
 
@@ -232,13 +231,12 @@ analizeText(event){
         let str = ''
         
         verbs_default.forEach( (v) => {
-          
+  
           if(_.isEqual(v.name,terms[0].normal)){
               if(v.default != ''){
                 str = v.pass ? `${v.default}` : v.default
               }
           }
-        
         })
 
         this.props.updateText(str);
