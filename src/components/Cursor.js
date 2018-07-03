@@ -21,14 +21,14 @@ const verbs_default = [
   {name: 'drop', default:'',pass:false},
   {name: 'look', default:'',pass:false},
   {name: 'read', default:'',pass:false},
-  {name: 'open', default:"",pass:false},
-  {name: 'say', default: "",pass:true},
-  {name: 'wait', default:'Time passes.',pass:false},
+  {name: 'open', default:'',pass:false},
+  {name: 'say', default: '',pass:true},
+  {name: 'wait', default:`Time passes.`,pass:false},
   {name: 'answer', default:'',pass:false},
   {name: 'turn on', default:'',pass:false},
   {name: 'turn off', default:'',pass:false},
   {name: 'wear', default:'',pass:false},
-  {name: 'smell', default:'You smells the scent of the rain.',pass:false},
+  {name: 'smell', default:`You smells the scent of the rain.`,pass:false},
   {name: 'show', default:'',pass:false},
   {name: 'tell', default:'',pass:false},
   {name: 'give', default:'',pass:false},
@@ -39,12 +39,12 @@ const verbs_default = [
   {name: 'west',default:'',pass:false},
   {name: 'north',default:'',pass:false},
   {name: 'south',default:'',pass:false},
-  {name: 'talk', default:'There is nobody around to talk with.',pass:false},
+  {name: 'talk', default:`There is nobody around to talk with.`,pass:false},
   {name: 'execute', default:'',pass:false},
   {name: 'get', default:'',pass:false},
   {name: 'go', default:'',pass:false},
-  {name: 'jump', default:'You jump on the spot, fuitlessly.',pass:false},
-  {name: 'sing', default:"'🎶 La La La!'",pass:false}
+  {name: 'jump', default:`You jump on the spot, fuitlessly.`,pass:false},
+  {name: 'sing', default:`🎶 La La La!`,pass:false}
 ];
 
 
