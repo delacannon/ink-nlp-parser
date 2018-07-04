@@ -6,7 +6,9 @@ const rootReducer = combineReducers({
   text: StoryReducer,
   image: StoryReducer,
   choices: StoryReducer,
-  room: StoryReducer
+  room: StoryReducer,
+  light: StoryReducer,
+  display: StoryReducer
 });
 
 export default rootReducer;

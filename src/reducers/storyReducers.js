@@ -1,11 +1,13 @@
-import { FETCH_STORY, UPDATE_TEXT, UPDATE_CHOICES, UPDATE_IMAGE, UPDATE_ROOM} from "../actions/types";
+import { FETCH_STORY, UPDATE_TEXT, UPDATE_CHOICES, UPDATE_IMAGE, UPDATE_ROOM,CHANGE_DISPLAY,CHANGE_LIGHT} from "../actions/types";
 
 const initialState = {
 	story:null,
   choices:[],
   image:[],
 	text:[],
-  room:''
+  room:'',
+  light:false,
+  display:false
 }
 
 const StoryReducer = (state = initialState, action) => {
@@ -21,6 +23,12 @@ const StoryReducer = (state = initialState, action) => {
         ...state,
         image:[...state.image, action.payload]
       }
+    }
+    case CHANGE_DISPLAY:{
+      return {...state, display:action.payload}
+    }
+    case CHANGE_LIGHT:{
+      return {...state, light:action.payload}
     }
     case UPDATE_ROOM:{
       return {...state, room:action.payload}

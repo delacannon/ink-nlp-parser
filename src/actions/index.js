@@ -1,6 +1,7 @@
 
 import { Story } from 'inkjs'
-import { FETCH_STORY, UPDATE_TEXT, UPDATE_CHOICES, UPDATE_IMAGE, UPDATE_ROOM } from './types'
+import { FETCH_STORY, UPDATE_TEXT, UPDATE_CHOICES, UPDATE_IMAGE, UPDATE_ROOM,
+CHANGE_DISPLAY, CHANGE_LIGHT } from './types'
 
 export const fetchStory = (storyData) => dispatch => {
 	
@@ -13,6 +14,24 @@ export const fetchStory = (storyData) => dispatch => {
 				payload: story
 			})
 		})
+
+}
+
+export const changeDisplay = (value) => dispatch => {
+
+	dispatch({
+		type:CHANGE_DISPLAY,
+		payload: value
+	})
+
+}
+
+export const changeLight = (value) => dispatch => {
+
+	dispatch({
+		type:CHANGE_LIGHT,
+		payload: value
+	})
 
 }
 

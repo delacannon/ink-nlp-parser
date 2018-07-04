@@ -117,7 +117,7 @@ processDirection(str){
 }
 
 scrollToBottom = () =>  {
-    scroll.scrollToBottom({isDynamic:true});
+    scroll.scrollToBottom({isDynamic:true,offset:100});
 }
 
 
@@ -143,7 +143,7 @@ analizeText(event){
 
       //Global objects 
       let obj = [], get_key = _.keys(getObjs), daobject = null
-
+      console.log(terms)
       get_key.forEach((k) => {
          obj.push(k.replace(/_/g,',').split(","))
       })
@@ -309,10 +309,7 @@ analizeText(event){
       }
 
        this.props.updateText(str);
-
-      
     }
-
 
      if(daobject && !destiny && direction === null){
 
@@ -360,8 +357,8 @@ componentDidMount(){
       suggestion: {
         listStyleType:'none',
         border:'1px solid #f0f0f0',
-        padding:'0.6em',
-        fontSize:'1.1em',
+        padding:'0.2em',
+        fontSize:'1em',
         fontStyle:'italic'
       },
       suggestionHighlighted:{
@@ -377,7 +374,6 @@ componentDidMount(){
 }
 
 componentDidUpdate() {
-  console.log("mm")
   this.scrollToBottom();
 }
 

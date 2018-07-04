@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from "react-redux"
-import { updateText, updateChoices } from "../actions"
+import { updateText, updateChoices, changeDisplay } from "../actions"
 import { Grid, Row, Col } from 'react-flexbox-grid'
 import nlp from 'compromise'
 import * as Scroll from 'react-scroll'
@@ -48,6 +48,7 @@ getTags(){
 
   let {currentTags} = this.props.story
   
+
   if(currentTags[0] === "parser"){
     return (
        <div key={Math.floor(Math.random()*9999)} style={{marginTop:'0.5em', display:'block'}}>
@@ -59,8 +60,23 @@ getTags(){
 
 renderParagrafs(){
 
-let {text} = this.props
-return text
+let {text} = this.props, posx1, posx2,newarr;
+
+if(!this.props.display){
+text.map((t,i) => {
+  if(t.match(/\>(?=[^>]*$)/g)){
+      posx1 = i;
+  }
+  i++
+})
+posx2 = text.length
+newarr = _.slice(text,posx1,posx2)
+}else{
+newarr = text;
+}
+
+
+return newarr
       .map( txt => {
         if(txt.length>0){
        return  (   
@@ -91,7 +107,6 @@ getObjectFromRoom(list){
 
 }
 
-
 uniqeObjects = (arrArg) => {
   return arrArg.filter((elem, pos, arr) => {
     return arr.indexOf(elem) == pos;
@@ -114,13 +129,13 @@ clickInventoryItems(e){
     let room_objects = this.getObjectFromRoom(parentList);
 
       //Global objects 
-      let obj = [], get_key = _.keys(getObjs), daobject = null
+    let obj = [], get_key = _.keys(getObjs), daobject = null
   
-      get_key.forEach((k) => {
+    get_key.forEach((k) => {
          obj.push(k.replace(/_/g,',').split(","))
-      })
+    })
 
-      obj.forEach( (a,i) =>{
+    obj.forEach( (a,i) =>{
 
           let _terms = []
           terms.forEach( (t) => {
@@ -136,12 +151,12 @@ clickInventoryItems(e){
             }
           
           }
-      })
+    })
   
-  this.props.updateText(`> examine ${e.target.innerHTML}`)
-  this.props.story.ChoosePathString(`${daobject}`)
-  this.props.updateText(this.props.story.Continue())
-  this.scrollToBottom()
+    this.props.updateText(`> examine ${e.target.innerHTML}`)
+    this.props.story.ChoosePathString(`${daobject}`)
+    this.props.updateText(this.props.story.Continue())
+    this.scrollToBottom()
 
 }
 
@@ -161,13 +176,14 @@ getInventoryItems(){
 
 }
 
+updateDisplay(){
 
+let value = this.props.display ? false : true;
+this.props.changeDisplay(value)
 
-getStoryMap(){ }
+}
 
 render() {
-
- 
   
     return (
 
@@ -207,7 +223,12 @@ render() {
                 <div>
                   <h3>Score: {this.props.story.variablesState.$("score")}</h3>
                   <hr/>
-                  {this.getStoryMap()}
+                  <Col xs={'center'} >
+                  <a className="Button">
+                    <span className="away">{`${this.props.display ? `Disable Scroll` : `Enable Scroll`}`}</span>
+                    <span className="over" onClick={() => this.updateDisplay()}>{`${this.props.display ? `Disable Scroll` : `Enable Scroll`}`}</span>
+                  </a>
+                  </Col>
                 </div>
                 </div>
               </Col>
@@ -218,11 +239,12 @@ render() {
 
 }
 
-const mapStateToProps = ({ story, text, choices, image, room }) => ({ 
+const mapStateToProps = ({ story, text, choices, image, room, display }) => ({ 
       story: story.story, 
       text:text.text, 
       room:room.room,
-      choices:choices.choices 
+      choices:choices.choices,
+      display:display.display
     });
 
-export default connect(mapStateToProps, {updateText, updateChoices})(Story);
+export default connect(mapStateToProps, {updateText, updateChoices, changeDisplay})(Story);

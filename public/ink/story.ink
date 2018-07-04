@@ -50,9 +50,9 @@ Hurrying through the rainswept November night, you're glad to see the bright lig
   = look_chandeliers_glittering
   Glittering chandeliers.
   ->done
-  = look_room_hall_gold_decorated_foyer
-  ->examine_room_hall_gold_decorated_foyer
-  = examine_room_hall_gold_decorated_foyer
+  = look_room_hall_gold_decorated_foyer_house_opera
+  ->examine_room_hall_gold_decorated_foyer_house_opera
+  = examine_room_hall_gold_decorated_foyer_house_opera
     You are standing in a spacious hall, splendidly decorated in red and gold, with glittering chandeliers overhead. The entrance from the street is to the north, and there are doorways south and west.
     ->done
    = examine_room_hall_gold_decorated
@@ -96,9 +96,9 @@ Hurrying through the rainswept November night, you're glad to see the bright lig
   - The walls of this small room were clearly once lined with hooks, though now only one remains. The exit is a door to the east.
   -
   }
-{CloakState == hang: 
-  On the small brass hook there is a velvet cloak.
-}
+  {CloakState == hang:
+    On the small brass hook there is a velvet cloak.
+  }
 ~ listObjectsOnFloor()
   #parser
   ->DONE
@@ -121,6 +121,16 @@ Hurrying through the rainswept November night, you're glad to see the bright lig
   = north
   You can't go that way.
   ->done
+  = unhang_cloak_velvet_black
+  {CloakState == hang: 
+    You grab the cloak from the hook.
+    ~ get(velvet_cloak)
+    ~ CloakState = on_hand
+    ~ BarState = dark
+    - else:
+    The cloak is not on the hook.
+  }
+  -> done
   = hang_cloak_velvet_black
   {CloakState == worn: 
     You take off the velvet cloak
@@ -153,9 +163,9 @@ Hurrying through the rainswept November night, you're glad to see the bright lig
   ->examine_small_brass_hook_hooks
   = examine_small_brass_hook_hooks
    {CloakState == hang:
-      It's just a small brass hook, with a cloak hanging on it. Screwed to the wall.
+       It's just a small brass hook, with a cloak hanging on it. Screwed to the wall.
       -else:
-      It's just a small brass hook screwed to the wall.
+       It's just a small brass hook screwed to the wall.
    }
 
   ->done
@@ -266,7 +276,11 @@ A handsome cloak, of velvet trimmed with satin, and slightly spattered with rain
 ->take_cloak_velvet_black
 == take_cloak_velvet_black
   {velvetState != RoomName: 
-    You left the cloak in another rooom
+    {CloakState == (worn) || CloakState==(on_hand):
+      You already have the cloak
+      -else:
+       You left the cloak in another rooom
+    }    
     ~ CloakState = another_room
   }
    {velvetState == RoomName: 
@@ -279,11 +293,9 @@ A handsome cloak, of velvet trimmed with satin, and slightly spattered with rain
       ~ get(velvet_cloak)
   }
   {CloakState == hang:
-      You have hanged the cloak on the Cloakroom.
+      You unhang the cloak on the Cloakroom.
   }
-  {CloakState == (worn, on_hand):
-      You already have the cloak
-  }    
+  
 -> currentRoom
 
 === you_win ===
